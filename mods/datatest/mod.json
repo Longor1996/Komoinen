@@ -1,0 +1,9 @@
+{
+  "name": "DataTest",
+  "author": "Longor",
+  "version": "0.0.1",
+  "assets":"/assets",
+  "dependencies": [
+    {"name":"ModTest", "version":"0.0.1"}
+  ]
+}

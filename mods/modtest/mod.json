@@ -1,0 +1,9 @@
+{
+  "name": "ModTest",
+  "author": "Longor",
+  "version": "0.0.1",
+  "assets":"/assets",
+  "dependencies": [
+    {"name":"ZipModTest", "version":"0.0.1"}
+  ]
+}

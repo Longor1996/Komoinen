@@ -1,0 +1,19 @@
+{
+  "name": "JarModTest",
+  "author": "Longor",
+  "version": "0.0.1",
+  "assets":"/assets",
+  "entry": "mod.ModuleObj",
+  "bindings": [
+    {
+      "name": "property",
+      "bound_type": "java.lang.String",
+      "param_type": "java.lang.String",
+      "maker_kind": "multiton",
+      "maker_type": "mod.CustomPropGet"
+    }
+  ],
+  "dependencies": [
+    {"name":"ZipModTest", "version":"0.0.1"}
+  ]
+}
