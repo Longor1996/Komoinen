@@ -34,6 +34,7 @@ class ModuleManager: ModuleAccess {
     val modules = HashMap<String, Module>()
     val modulesInfo = HashMap<String, ModuleInfo>()
     val assetProviders = ArrayList<AssetSource>()
+    var filter: (ModuleInfo) -> Boolean = {true}
 
     fun modulesCheckAndLoad() {
         if(modulesInfo.isEmpty()) {
@@ -185,6 +186,13 @@ class ModuleManager: ModuleAccess {
     override fun moduleLoad(path: Path) {
         try {
             val modInfo = readModule(path)
+
+            // This exists for basic module loading security.
+            if(!filter(modInfo)) {
+                println("    [$IDEN] ModuleInfo loaded but filtered by ModuleManager: $modInfo")
+                return
+            }
+
             modulesInfo.put(modInfo.name, modInfo)
             println("    [$IDEN] Found module: $path")
         } catch (ex: Exception) {
@@ -205,6 +213,7 @@ class ModuleManager: ModuleAccess {
         }
 
         println("   [$IDEN] Scanning for modules: $resolved_path")
+        // Walk trough the files, but skip the module directory itself.
         Files.walk(resolved_path, 1).skip(1).forEach {
             if(Files.isDirectory(it) || it.fileName.toString().endsWith(".zip") || it.fileName.toString().endsWith(".jar")) {
                 moduleLoad(it)

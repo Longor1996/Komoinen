@@ -57,12 +57,12 @@ Sorry about that, there was no other way!
 ## Usage Example
 
 ```kotlin
+// Example event type
+class ExampleEvent
+
 fun main(args: Array<String>) {
     // Create a new context...
     val komoinen = Komoinen("root")
-    
-    // Example event type
-    class ExampleEvent
     
     val listener = object {
         @EventListener
@@ -80,7 +80,7 @@ fun main(args: Array<String>) {
         bind<String>("workdir") with value("C:/temp")
         
         // How about a lazily created singleton?
-        bind<java.sql.Connection> with singleton
+        bind<java.sql.Connection>("database") with singleton
         { DriverManager.getConnection("jdbc:mysql//localhost:3306/") }
         
         // Or a dice-throw generator? (note the 'p' after 'bind')
